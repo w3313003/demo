@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JQ悬浮切换案例</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul,li{
+				list-style: none;
+			}
+			img {
+				vertical-align: middle;
+				width: 100%;
+			}
+			a {
+				display : block;
+			}
+			.box {
+				position: relative;
+				margin: 0 auto;
+			}
+			.left-btn,.right-btn {
+				width: 100px;
+				height: 330px;
+				position: absolute;
+				text-align: center;
+				background-color: rgba(0,0,0,.2);
+				color : #FFFFFF;
+				line-height: 330px;
+				font-size: 30px;
+				z-index: 9;
+				cursor : pointer;
+			}
+			.item {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.left-btn {
+				left: 0;
+			}
+			.box .right-btn {
+				right: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" data-set='{"width":1000,
+			"height":330,
+			"posterWidth":780,
+			"posterHeight":330,
+			"autoPlay":true,
+			"vertivalAlign":"middle",
+			"scale":0.8,
+			"speed":500,
+			"delay":2000
+			}'>
+
+			<div class="btn left-btn">  < </div>
+			<div class="btn right-btn"> > </div>
+			<ul class='ul'>
+				<li class='item'><a href="javascript:;"><img src="img/1.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/2.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/3.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/4.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/5.jpg" alt="" /></a></li>
+								<li class='item'><a href="javascript:;"><img src="img/2.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/3.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/4.jpg" alt="" /></a></li>
+				<li class='item'><a href="javascript:;"><img src="img/5.jpg" alt="" /></a></li>
+			</ul>
+		</div>
+		<script src='js/jquery-3.2.1.js'></script>
+		<script src='js/muma.js'></script>
+		<script>
+			$(document).ready(function(){
+				Carousel.init($('.box'));
+				// new Carousel($('.box'))
+			})
+		</script>
+	</body>
+</html>
