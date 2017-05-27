@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				list-style: none;
+				margin-top: 4px;
+				background-color: #6190EF;
+				color: #fff;
+			}
+			
+			#div1 {
+				position: relative;
+				width: 500px;
+				height: 300px;
+				border: 1px solid darkcyan;
+			}
+			
+			#div2 {
+				position: absolute;
+				width: 300px;
+				height: 200px;
+				border: 1px solid #000;
+				top: 50px;
+				left: 30px;
+				overflow: hidden;
+			}
+			
+			#ul2 {
+				background-color: rosybrown;
+			}
+		</style>
+		<title></title>
+	</head>
+
+	<body>
+		<div id="div1">
+			<div id="div2">
+				<ul id="ul1">
+					<li>星期1</li>
+					<li>星期2</li>
+					<li>星期3</li>
+					<li>星期4</li>
+					<li>星期5</li>
+					<li>星期6</li>
+					<li>星期日</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script>
+		var oDiv = document.getElementById("div2");
+		//再多复制一个ul；
+		oDiv.innerHTML += oDiv.innerHTML;
+		var ul = oDiv.getElementsByTagName("ul")[0]
+		var li = oDiv.getElementsByTagName("li");
+		var timer;
+		var num = 0;
+
+		function move() {
+			timer = setInterval(function() {
+				if(num == ul.scrollHeight) {
+					num = 0;
+				} else {
+					num++;
+					oDiv.scrollTop = num;
+				};
+				if(num % (li[0].offsetHeight * 2) === 0) {
+					clearInterval(timer);
+					setTimeout(move, 2000); //超时调用；
+				}
+			}, 1)
+		}
+		move();
+	</script>
+
+</html>

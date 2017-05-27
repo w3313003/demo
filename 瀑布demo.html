@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#main {
+				position: relative;
+				margin: 0 auto;
+			}
+			
+			.pin {
+				padding: 15px 0 0 15px;
+				float: left;
+			}
+			
+			.box {
+				padding: 10px;
+				border: 1px solid #f1f1f1;
+				border-radius: 5px;
+				box-shadow: 0 0 5px #ccc;
+			}
+			
+			.box img {
+				width: 165px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="main">
+			<div class="pin" id="div1">
+				<div class="box">
+					<img src="img/images/0.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/2.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/3.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/4.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/5.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/6.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/7.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/8.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/9.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/10.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/11.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/12.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/13.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/14.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/15.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/16.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/17.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/18.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/19.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/20.jpg" />
+				</div>
+			</div>
+			<div class="pin">
+				<div class="box">
+					<img src="img/images/21.jpg" />
+				</div>
+			</div>
+		</div>
+		<script>
+			function waterFall(parent,box) {
+				//将main下class为box的元素；
+				var oParent = document.getElementById(parent);
+				var obox = oParent.getElementsByClassName(box);
+				//计算页面列数  页面宽度/box的宽度；
+				var boxw = obox[0].offsetWidth;
+				var cols = Math.floor(document.documentElement.clientWidth / boxw);
+				//设置main 的宽度；
+				oParent.style.width = cols * boxw + "px";
+				//存放每列高度的数组；
+				var colArr = [];
+				//排序；
+				for(let i = 0; i < obox.length; i++) {
+					if(i < cols) {
+						colArr.push(obox[i].scrollHeight);
+					} else {
+						//找到最小值 也就是每次最小的高度
+						var minH = Math.min.apply(null, colArr);
+						var index = colArr.indexOf(minH); //找到最小值在数组中的索引
+						obox[i].style.position = "absolute";
+						obox[i].style.left = obox[index].offsetLeft + "px";
+						obox[i].style.top = minH + "px";
+						//更新最小值；
+						colArr[index] += obox[i].offsetHeight;
+					}
+				}
+			}
+
+			function checkScroll() {
+				var oParent = document.getElementById("main");
+				var box = oParent.getElementsByClassName("pin");
+				var lastH = box[box.length - 1].offsetTop + Math.floor(box[box.length - 1].offsetHeight / 2);
+				var X = document.body.scrollTop || document.documentElement.scrollTop;
+				var H = document.body.clientHeight || document.documentElement.clientHeight;
+				return(lastH < X + H) ? true : false;
+			}
+			window.onload = function() {
+				waterFall("main", "pin");
+				window.addEventListener("scroll", function() {
+					//后台调用；
+					var dateInt = {
+						"date": [{
+							"src": "0.jpg"
+						}, {
+							"src": "1.jpg"
+						}, {
+							"src": "2.jpg"
+						}, {
+							"src": "3.jpg"
+						}, {
+							"src": "4.jpg"
+						}]
+					};
+					var da = JSON.stringify(dateInt);
+					var dato = JSON.parse(da);
+					if(checkScroll()) {
+						var oParent = document.getElementById("main");
+						for(let i = 0; i < dateInt.date.length; i++) {
+							var D = document.createDocumentFragment();
+							var oBox = document.createElement("div");
+							oBox.className = "pin";
+							var oPic = document.createElement("div");
+							oPic.className = "box";
+							var img = document.createElement("img");
+							img.src = "img/images/" + dato.date[i].src;
+							oPic.appendChild(img);
+							oBox.appendChild(oPic);
+							D.appendChild(oBox);
+							oParent.appendChild(D);
+						}
+						waterFall("main", "pin");
+					}
+				}, false)
+			};
+			for (let j=1; j<10; j++){
+				if (j%2==0){
+					j *= 2;
+				}
+				console.log(j);
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1 {
+				position: relative;
+				margin: 0 auto;
+				width: 200px;
+				height: 20px;
+				top: 50px;
+				border: 1px solid green;
+				overflow: hidden;
+			}
+			
+			ul,
+			li {
+				list-style: none;
+				float: left;
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				margin-right: 5px;
+				background-color: #35AB88;
+				color: #FFFFFF;
+			}
+			
+			#div2 {
+				width: 2000px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="div1">
+			<div id="div2">
+				<ul>
+					<li>星期1</li>
+					<li>星期2</li>
+					<li>星期3</li>
+					<li>星期4</li>
+					<li>星期5</li>
+					<li>星期6</li>
+					<li>星期日</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			var odiv = document.getElementById("div1");
+			var odiv2 = document.getElementById("div2");
+			odiv2.innerHTML += odiv2.innerHTML; //先复制内容 在匹配UL
+			var ul = odiv2.getElementsByTagName("ul")[0];
+			var timer;
+			var num = 0
+			var moves = function() {
+				timer = setInterval(function() {
+					if(num === ul.offsetWidth) {
+						num = 0;
+					} else {
+						odiv.scrollLeft = num++;
+					}
+				}, 30)
+			};
+			moves();
+			//二级DOM；
+			odiv.addEventListener("mouseover", function() {
+				clearInterval(timer)
+			}, false);
+			odiv.addEventListener("mouseout", function() {
+				moves();
+			}, false);
+		</script>
+	</body>
+
+</html>

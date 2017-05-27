@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>点击Div，显示其innerHTML</title>
+		<style>
+			body {
+				font: 12px/1.5 Tahoma;
+			}
+			
+			#outer {
+				width: 500px;
+				margin: 0 auto;
+			}
+			
+			#outer div {
+				border: 2px solid #ccc;
+				padding: 10px;
+				margin-bottom: 10px;
+				text-indent: 2em;
+				cursor: pointer;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				var oDiv = document.getElementById("outer").getElementsByTagName("div");
+				for(var i = 0; i < oDiv.length; i++) {
+					oDiv[i].onclick = function() {
+						alert(this.innerHTML)
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="outer">
+			<div><strong>11111</strong>111111</div>
+			<div>222222222222222222222222222222222222222222</div>
+			<div>333333333333333333333333333</div>
+			<div>44444444444444444444444444444444444444</div>
+		</div>
+	</body>
+
+</html>

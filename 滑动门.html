@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			img {
+				vertical-align: middle;
+				position: absolute;
+				left: 0;
+				border-left: 1px solid #666;
+			}
+			
+			#main {
+				overflow: hidden;
+				margin: 0 auto;
+				height: 165px;
+				position: relative;
+				border: 1px solid #999;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="main">
+			<img src="img/H1.jpg" />
+			<img src="img/H2.jpg" />
+			<img src="img/H3.jpg" />
+			<img src="img/H4.jpg" />
+		</div>
+		<script>
+			window.onload = function() {
+				var div = document.getElementById("main");
+				var imgs = div.getElementsByTagName("img");
+				//要显示的单张图片的宽度
+				var imgwidth = imgs[0].offsetWidth;
+				//设置每个图片露出部分的长度   可自定义
+				var exporwidth = 150;
+				//设置外层盒子的总宽度   为 第一张图片宽带加上其余图片没被掩盖的宽度
+				var divWidth = imgwidth + (imgs.length - 1) * exporwidth;
+				div.style.width = divWidth + "px";
+				//设置每张图片的初始位置  
+				function reset() {
+					for(var i = 1; i < imgs.length; i++) {
+						imgs[i].style.left = imgwidth + exporwidth * (i - 1) + "px";
+					}
+				};
+				reset();
+				//计算每道门应该移动的距离；即图片总宽度减去露出部分；； 这个距离实际上就是被遮挡的部分
+				var translate = imgwidth - exporwidth;
+								for(var i = 0; i < imgs.length; i++) {
+									-function(i) {
+										imgs[i].onmouseover = function() {
+											//将每道门复位；
+											reset();
+											//如果要移动第四张图片   即让从第二张图片开始都往右移动translate 所以为减
+											//j=1;j<=i，就是表示从第二张图片到当前所遍历到的i的图片
+											for(j = 1; j <= i; j++) {
+												imgs[j].style.left = parseInt(imgs[j].style.left) - translate + "px";
+												console.log(i);
+											}
+										}
+									}(i);
+								}
+				//				重写的闭包； 高程P181;
+				//				函数参数是按值传递的 可以复制副本
+//				for(let i = 0; i < imgs.length; i++) {
+//					imgs[i].onmouseover = function(num) {
+//						reset();
+//						return function() {
+//							for(j = 1; j <= num; j++) {
+//								imgs[j].style.left = parseInt(imgs[j].style.left) - translate + "px";
+//							}
+//						};
+//					}(i);
+//				}; //把 I赋值给 num；
+
+				//不用闭包；
+				//								for (var i=0; i<imgs.length;i++){
+				//									imgs[i].index = i; 
+				//									// 自定义个属性 把i保存在里面；
+				//									imgs[i].onmouseover = function(){
+				//										reset(); //复位;
+				//										for (let i=1; i<=this.index; i++){
+				//											imgs[i].style.left = parseInt(imgs[i].style.left) - translate + "px";
+				//										}
+				//									}
+				//								}
+
+			}
+		</script>
+	</body>
+
+</html>

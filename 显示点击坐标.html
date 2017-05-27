@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>显示单击的坐标</title>
+		<script type="text/javascript">
+			document.onclick = function(event) {
+				var event = event || window.event;
+				alert("坐标：[" + event.clientX + ", " + event.clientY + "]")
+			}
+		</script>
+	</head>
+
+	<body>
+		<h2>请单击页面</h2>
+	</body>
+
+</html>
