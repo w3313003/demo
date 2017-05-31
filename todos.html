@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>todo</title>
+		<link rel="stylesheet" href="css/task.css">
+		<script src='js/vue.js'></script>
+	</head>
+
+	<body>
+		<div class="page-top">
+			<div class="page-content">
+				<h2>任务计划列表</h2>
+			</div>
+		</div>
+		<div class="main">
+			<h3 class="big-title">添加任务：</h3>
+			<input placeholder="单击回车即可添加任务" class="task-input" type="text" @keyup.enter='addValue' />
+			<ul class="task-count" v-show="isShow">
+				<li>{{count}}个任务已完成</li>
+				<li class="action">
+					<a class="active" href="#">所有任务</a>
+				</li>
+			</ul>
+			<h3 class="big-title">任务列表：</h3>
+			<div class="tasks">
+				<span class="no-task-tip">还没有添加任何任务</span>
+				<ul class="todo-list">
+					<li class="todo" v-for='(item,index) in list' :class='{"completed":item.isChoice}'>
+						<div class="view">
+							<input class="toggle" type="checkbox"  @click='item.isChoice=!item.isChoice' />
+							<label class=''>{{item.title}}</label>
+							<button class="destroy" @click='removeTask(index)'></button>
+						</div>
+						<input class="edit" type="text" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			let vm = new Vue({
+				el: '.main',
+				data: {
+					list: [{
+						title: '吃饭打豆豆',
+						isChoice: false,
+					}, {
+						title: '睡觉',
+						isChoice: false,
+					}],
+					isShow: true,
+				},
+				methods: {
+					addValue(event) {
+						this.list.push({
+							title: event.target.value,
+							isChoice: false,
+						});
+					},
+					removeTask(index) {
+						this.list.splice(index, 1);
+					}
+				},
+				computed: {
+					count() {
+						return this.list.filter((value)=>{
+							return value.isChoice;
+						}).length;
+					}
+				},
+				watch: {
+					list() {
+						(this.list.length === 0) && (this.isShow = false);
+						(this.list.length != 0) && (this.isShow = true);
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>
