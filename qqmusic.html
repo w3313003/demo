@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>qq</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/vue-router@2.0.3"></script>
+	<link rel="stylesheet" href="css/carouselCss.css">
+	<style type="text/css">
+		body,ul,li {
+			margin: 0px;
+			padding: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<Carousel></Carousel>
+	</div>
+</body>
+
+	<template id="Carousel-temp">
+		<div class="Carousel">
+			<div class="Carousel-bg">
+				<div class="wrap">
+					<div class="pre arrow" @click = "togglePre"><a href="javascript:;"><</a></div>
+					<div class="Carousel-content">
+						<ul id="Item-list">
+							<li v-for="item in items">
+								<div class="cover">
+									<img :src = "item.album.img">
+									<div class="mask"></div>
+									<div class="playerbtn"></div>
+								</div>
+								<div class="detail">
+									<a href="javascript:;">
+										{{item.album.albumName}}
+									</a>
+									<a href="javascript:;">
+										{{item.album.singer}}
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="next arrow" @click = "toggleNext"><a href="javascript:;">></a></div>
+					<div class="indexs">
+						<span v-for="i in 3" @click = "lightIndex(i)">__</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<script type="text/javascript">
+		var data = {
+			items: [
+				{
+					album: {
+						img: 'img/qq1.jpg',
+						albumName: '一如年少模样',
+						singer:'陈鸿宇'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq1.jpg',
+						albumName: '前世情人',
+						singer:'周杰伦'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq1.jpg',
+						albumName: '残酷月光',
+						singer:'林宥嘉'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq1.jpg',
+						albumName: '龙战骑士',
+						singer:'周杰伦'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq2.jpg',
+						albumName: '千里之外',
+						singer:'周杰伦'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq2.jpg',
+						albumName: '青花瓷',
+						singer:'周杰伦'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq2.jpg',
+						albumName: '止战之殇',
+						singer:'周杰伦'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq2.jpg',
+						albumName: '尘埃落定',
+						singer:'张敬轩'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq3.jpg',
+						albumName: 'ZJ	',
+						singer:'ba'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq3.jpg',
+						albumName: 'ZJ	',
+						singer:'bbf'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq3.jpg',
+						albumName: 'ZJ	',
+						singer:'bbf'
+					}
+				},
+				{
+					album: {
+						img: 'img/qq3.jpg',
+						albumName: 'ZJ	',
+						singer:'bbf'
+					}
+				},
+				
+			]
+		};
+		let ul, spans, index = 0, animated = false;
+		Vue.component('Carousel',{
+			template:"#Carousel-temp",
+			data: function () {
+				return data;
+			},
+			mounted: function () {
+				ul = this.$el.querySelector("#Item-list");
+				ul.style.left =  "0px";
+				spans = this.$el.querySelectorAll('span');
+				spans[0].className = "on";
+			},
+			methods: {
+				togglePre: function () {
+					if(!animated){
+						index -= 1;
+						if(index < 0) index = 2;
+						this.toggle();
+					}
+				},
+				toggleNext: function () {
+					if(!animated) {
+						index += 1;
+					if(index > 2) index = 0;
+					this.toggle();
+					}
+				},
+				toggle: function () {
+						//内容切换
+						let timer = null;
+						animated = true;
+						let offset = (-1200) * index;
+						clearInterval(timer);
+						timer = setInterval(function () {
+							let left,speed;
+							left = parseInt(ul.style.left);
+							speed = (offset - left)/10;
+							speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+							if(left == offset){
+								clearInterval(timer);
+								animated = false;
+							}else{
+								ul.style.left = left + speed + 'px';
+							}
+						},10);
+						//索引标识切换
+						for (var i = 0; i < spans.length; i++) {
+							if( spans[i].className == 'on' )
+								spans[i].className = '';
+						}
+						spans[index].className = 'on';
+					
+				},
+				lightIndex: function (i) {
+					index = i-1;
+					this.toggle();
+				}
+			}
+		});
+		new Vue({
+			el: "#app",
+		});
+	</script>
+</html>

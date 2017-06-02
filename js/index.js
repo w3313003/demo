@@ -30,10 +30,10 @@ let app = new Vue({
 			title: 'DOM元素基础操作',
 			demolist: [{
 				demoName: '控制div属性',
-				href: 'https://w3313003.github.io/demo/控制div属性.html',
+				href: 'https://w3313003.github.io/demo/控制DIV属性.html',
 			}, {
 				demoName: '用循环改变DIV颜色',
-				href: 'https://w3313003.github.io/demo/用循环改变DIV颜色.html',
+				href: 'https://w3313003.github.io/demo/用循环改变div颜色.html',
 			}, {
 				demoName: '鼠标移入改变样式',
 				href: 'https://w3313003.github.io/demo/鼠标移入改变样式.html',
@@ -118,27 +118,27 @@ let app = new Vue({
 			}, {
 				demoName: '模拟select样式',
 				href: 'https://w3313003.github.io/demo/模拟select.html',
-			},{
+			}, {
 				demoName: '无缝滚动-水平方向',
 				href: 'https://w3313003.github.io/demo/无缝右滚.html',
-			},{
+			}, {
 				demoName: '无缝滚动',
 				href: 'https://w3313003.github.io/demo/无缝滚动.html',
 			}, {
 				demoName: '选项卡',
 				href: 'https://w3313003.github.io/demo/选项卡.html',
-			},{
+			}, {
 				demoName: 'contextmenu事件-自定义右键菜单样式',
 				href: 'https://w3313003.github.io/demo/自定义右键菜单.html',
-			},{
+			}, {
 				demoName: '自定义多级右键菜单',
 				href: 'https://w3313003.github.io/demo/升级版自定义菜单.html',
-			},{
+			}, {
 				demoName: '自定义多级右键菜单',
 				href: 'https://w3313003.github.io/demo/升级版自定义菜单.html',
-			},],
+			}, ],
 			isShow: false,
-		},{
+		}, {
 			title: '轮播',
 			demolist: [{
 				demoName: '轮播图',
@@ -149,7 +149,7 @@ let app = new Vue({
 			}, {
 				demoName: '支持反向播放',
 				href: 'https://w3313003.github.io/demo/自动改变方向的轮播.html',
-			},{
+			}, {
 				demoName: '按钮控制播放',
 				href: 'https://w3313003.github.io/demo/左右按钮控制轮播.html',
 			}, {
@@ -158,9 +158,9 @@ let app = new Vue({
 			}, {
 				demoName: '滑动门效果',
 				href: 'https://w3313003.github.io/demo/滑动门.html',
-			},],
+			}, ],
 			isShow: false,
-		},{
+		}, {
 			title: 'DOM拖拽控制',
 			demolist: [{
 				demoName: '鼠标拖拽',
@@ -171,7 +171,7 @@ let app = new Vue({
 			}, {
 				demoName: '面向对象的拖动组件',
 				href: 'https://w3313003.github.io/demo/面向对象拖动.html',
-			},{
+			}, {
 				demoName: '跟随移动',
 				href: 'https://w3313003.github.io/demo/移动.html',
 			}, {
@@ -180,9 +180,9 @@ let app = new Vue({
 			}, {
 				demoName: '模态框拖拽demo',
 				href: 'https://w3313003.github.io/demo/弹出层拖拽demo.html',
-			},],
+			}, ],
 			isShow: false,
-		},{
+		}, {
 			title: '页面交互',
 			demolist: [{
 				demoName: '复选框状态更新',
@@ -193,12 +193,12 @@ let app = new Vue({
 			}, {
 				demoName: '年历',
 				href: 'https://w3313003.github.io/demo/年历.html',
-			},{
+			}, {
 				demoName: '星级评分',
 				href: 'https://w3313003.github.io/demo/星级评分.html',
-			},],
+			}, ],
 			isShow: false,
-		},{
+		}, {
 			title: '练习',
 			demolist: [{
 				demoName: '网页计算器',
@@ -206,9 +206,9 @@ let app = new Vue({
 			}, {
 				demoName: '表格生成',
 				href: 'https://w3313003.github.io/demo/table.html',
-			},],
+			}, ],
 			isShow: false,
-		},{
+		}, {
 			title: '实例',
 			demolist: [{
 				demoName: '原生js瀑布流',
@@ -216,22 +216,28 @@ let app = new Vue({
 			}, {
 				demoName: '页面侧导航',
 				href: 'https://w3313003.github.io/demo/网页导航.html',
-			},{
+			}, {
 				demoName: '悬浮切换(jQuery)',
 				href: 'https://w3313003.github.io/demo/悬浮切换.html',
-			},],
+			}, ],
 			isShow: false,
-		},{
-			title: 'Vue2.0项目',
+		}, {
+			title: 'Vue',
 			demolist: [{
+				demoName: '任务列表',
+				href: 'https://w3313003.github.io/demo/todos.html',
+			},{
 				demoName: '购物车页面',
 				href: 'https://w3313003.github.io/demo/cart.html',
 			}, {
 				demoName: '地址信息',
-				href: 'https://w3313003.github.io/demo/addresss.html',
-			},],
+				href: 'https://w3313003.github.io/demo/address.html',
+			}, {
+				demoName: 'qq新歌首发',
+				href: 'https://w3313003.github.io/demo/qqmusic.html',
+			}, ],
 			isShow: false,
-		},]
+		}, ]
 	},
 	methods: {
 		//demo列表点击；
@@ -251,15 +257,24 @@ let app = new Vue({
 			return "(共" + value + "个)";
 		},
 	},
-		mounted: function() {
-			this.$nextTick(() => {
-				this.maskShow = true;
-			})
-		},
+	//		mounted: function() {
+	//			this.$nextTick(() => {
+	//				this.maskShow = true;
+	//			})
+	//		},
 });
 let nav = document.getElementById('nav-fixed'),
 	navTop = nav.offsetTop;
 window.onscroll = () => {
 	let top = document.documentElement.scrollTop || document.body.scrollTop;
 	top > navTop ? (nav.classList.add('navbar-fixed-top')) : (nav.classList.remove('navbar-fixed-top'));
-}
+};
+let mySwiper = new Swiper('.my-swiper', {
+	loop: true,
+	centeredSlides: true,
+	effect: 'coverflow',
+	slidesPerView: 2,
+	slideToClickedSlide: true,
+	prevButton: '.swiper-button-prev',
+	nextButton: '.swiper-button-next',
+})

@@ -1,110 +1,161 @@
+* {
+	margin: 0;
+	padding: 0;
+}
 
-			*{
-				margin: 0;
-				padding: 0;
-			}
-			.mask {
-				width: 100%;
-				height: 100%;
-				position: fixed;
-				top: 0;
-				left: 0;
-				background:url(../img/bgImg.jpg) no-repeat top center;
-				background-size: cover;
-				z-index: 2;
-			}
-			.mask .mask-btn {
-				width: 150px;
-				height: 50px;
-				text-align: center;
-				color : #fff;
-				font: 700 20px/50px "microsoft sans serif";
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				margin: -25px 0 0 -75px;
-				background-color: rgba(0,0,0,.6);
-				border-radius:10%;
-				transition: all 0.5s;
-			}
-			.mask-tip {
-				width: 300px;
-				height: 50px;
-				text-align: center;
-				color : #fff;
-				font: 700 20px/50px "microsoft sans serif";
-				position: absolute;
-				left: 50%;
-				top: 20%;
-				margin: -25px 0 0 -150px;
-				background-color: rgba(0,0,0,.6);
-				border-radius:10%;
-				transition: all 0.5s;
-			}
-			.mask .mask-btn:hover {
-				cursor: pointer;
-				transform: scale(1.25,1.25);
-			}
-			.open-enter-active{
-				transition: all 1s;
-			}
-			.open-leave-active {
-				transition: all 1.5s;
-			}
-			.open-enter{
-				opacity: 0;
-				transform: translateY(-700px);
-			}
-			.open-leave-active{
-				opacity: 0;
-				transform: rotate(720deg) scale(0.01,0.01);
-			}
-			.head {
-				background: url(../img/Header-bg.jpg) no-repeat;
-				position: relative;
-				background-size:cover;
-			}
-			header.head  nav{
-				background-color: rgba(255,255,255,.7);
-			}
-			/*demo展示*/
-			.demoshow .demo-list{
-				box-shadow: 0 0  10px 3px #008B8B;
-				margin-top: 20px;
-				padding-left: 0;padding-right: 0;
-			}
-			.demo-row {
-				background-color: #ceddf9;
-				margin: 0;
-			}
-			.demo-title{
-				height: 30px;
-				line-height: 30px;
-				background-color: #E4B9C0;
-				text-align: center;
-				border-bottom: 1px solid #fff;
-			} 
-			.demo-title-active{
-				background-color: #b7c086;
-				color: #fff;
-			}
-			.demo-list:hover{
-				cursor: pointer;
-			}
-			.demo-content{
-				transition: all 1s;
-			}
-			.demo-content:hover{
-				background-color: #008B8B;
-				transform: translateX(10px);
-				
-			}
-			.demo-content:hover a{
-				text-decoration: none;
-				color: #fff;
-			}
-			.demo-content a{
-				margin: 0 10px;
-				color: #000;
-				padding-top: 3px;
-			}
+.mask {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: url(../img/bgImg.jpg) no-repeat top center;
+	background-size: cover;
+	z-index: 2;
+}
+
+.mask .mask-btn {
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	color: #fff;
+	font: 700 20px/50px "microsoft sans serif";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -25px 0 0 -75px;
+	background-color: rgba(0, 0, 0, .6);
+	border-radius: 10%;
+	transition: all 0.5s;
+}
+
+.mask-tip {
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	color: #fff;
+	font: 700 20px/50px "microsoft sans serif";
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	margin: -25px 0 0 -150px;
+	background-color: rgba(0, 0, 0, .6);
+	border-radius: 10%;
+	transition: all 0.5s;
+}
+
+.mask .mask-btn:hover {
+	cursor: pointer;
+	transform: scale(1.25, 1.25);
+}
+
+.open-enter-active {
+	transition: all 1s;
+}
+
+.open-leave-active {
+	transition: all 1.5s;
+}
+
+.open-enter {
+	opacity: 0;
+	transform: translateY(-700px);
+}
+
+.open-leave-active {
+	opacity: 0;
+	transform: rotate(720deg) scale(0.01, 0.01);
+}
+
+.head {
+	background: url(../img/Header-bg.jpg) no-repeat;
+	position: relative;
+	background-size: cover;
+}
+
+header.head nav {
+	background-color: rgba(255, 255, 255, .7);
+}
+
+
+/*demo展示*/
+
+.demoshow .demo-list {
+	box-shadow: 0 0 10px 3px #008B8B;
+	margin-top: 20px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.demo-row {
+	background-color: #ceddf9;
+	margin: 0;
+}
+
+.demo-title {
+	height: 30px;
+	line-height: 30px;
+	background-color: #E4B9C0;
+	text-align: center;
+	border-bottom: 1px solid #fff;
+}
+
+.demo-title-active {
+	background-color: #b7c086;
+	color: #fff;
+}
+
+.demo-list:hover {
+	cursor: pointer;
+}
+
+.demo-content {
+	transition: all 1s;
+}
+
+.demo-content:hover {
+	background-color: #008B8B;
+	transform: translateX(10px);
+}
+
+.demo-content:hover a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.demo-content a {
+	margin: 0 10px;
+	color: #000;
+	padding-top: 3px;
+}
+
+.swiper-slide {
+	line-height: 300px;
+	color: #fff;
+	font-size: 36px;
+	text-align: center;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+.blue-slide {
+	background: #4390EE;
+}
+.red-slide {
+	background: #CA4040;
+}
+.orange-slide {
+	background: #FF8604;
+}
+.my-swiper {
+	overflow: hidden;
+}
+.swiper-button-prev,
+.swiper-button-next {
+	transition: all 1s;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+	transform: scale(1.2,1.2);
+}
