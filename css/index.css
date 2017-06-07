@@ -2,7 +2,12 @@
 	margin: 0;
 	padding: 0;
 }
-
+body{
+	background: url(../img/bg.png) no-repeat top center;
+	background-size:100% 100%;
+	background: cover;
+	background-attachment:fixed
+}
 .mask {
 	width: 100%;
 	height: 100%;
@@ -11,7 +16,7 @@
 	left: 0;
 	background: url(../img/bgImg.jpg) no-repeat top center;
 	background-size: cover;
-	z-index: 2;
+	z-index: 999;
 }
 
 .mask .mask-btn {
@@ -68,9 +73,7 @@
 }
 
 .head {
-	background: url(../img/Header-bg.jpg) no-repeat;
 	position: relative;
-	background-size: cover;
 }
 
 header.head nav {
@@ -95,7 +98,7 @@ header.head nav {
 .demo-title {
 	height: 30px;
 	line-height: 30px;
-	background-color: #E4B9C0;
+	background-color: #ceb6ba;
 	text-align: center;
 	border-bottom: 1px solid #fff;
 }
@@ -158,4 +161,55 @@ header.head nav {
 .swiper-button-prev:hover,
 .swiper-button-next:hover{
 	transform: scale(1.2,1.2);
+}
+.my .wrap {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.wrap h4 {
+	display: block;
+}
+.seacher-list{
+	position: absolute;
+	z-index: 10;
+	transition: all 1s;
+}
+.seacher-list .list-group-item:hover{
+	background: #FAEBCC;
+	cursor: pointer;
+	transform: scale(1.1,1.1);
+	color:#1A1A1A;
+	z-index: 11;
+	box-shadow: 0 0 5px #080808;
+}
+.seacher-enter-active{
+	transition: all 0.5s;
+}
+.seacher-leave-active{
+	transition: all 1s;
+}
+.seacher-enter,
+.seacher-leave-active{
+	opacity: 0;
+	transform: translateY(-100%) scale(1,0.1)
+}
+.tel {
+	position:fixed;
+	right:0;
+	top:100px;
+	width:30px;
+	height:80px;
+	background: #d0ae7e;
+	color: rgba(255,255,255,.8);
+	transition: all 1s;
+	border-radius: 10px;
+}
+.tel:hover{
+	transform: translate(-20px,0) scale(1.1,1.1);
+	box-shadow: 0 0 10px #000000;
+}
+.swiper-slide:hover{
+	transform:scale(1.2,1.2)
 }

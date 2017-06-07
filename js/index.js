@@ -1,30 +1,27 @@
-let app = new Vue({
+let vm = new Vue({
 	el: '#app',
 	data: {
 		maskShow: false,
+		selectValue: null,
+		response: [],
 		navItem: [{
-				text: '主页',
-				href: 'javascript:;',
+				text: 'Vue官方文档',
+				href: 'https://cn.vuejs.org/v2/api/',
 				isShow: true,
 			}, {
-				text: '关于我',
-				href: 'javascript:;',
+				text: 'bootstrap',
+				href: 'http://v3.bootcss.com/css/',
 				isShow: false,
 			},
 			{
-				text: 'demo',
-				href: 'javascript:;',
+				text: 'github',
+				href: 'http://github.com',
 				isShow: false,
 			}, {
-				text: '学习库',
-				href: 'javascript:;',
+				text: 'segmentfault',
+				href: 'https://segmentfault.com/t/javascript',
 				isShow: false,
 			},
-			{
-				text: '联系我',
-				href: 'javascript:;',
-				isShow: false,
-			}
 		],
 		demo: [{
 			title: 'DOM元素基础操作',
@@ -139,6 +136,19 @@ let app = new Vue({
 			}, ],
 			isShow: false,
 		}, {
+			title: '静态仿站',
+			demolist: [{
+				demoName: '京东首页',
+				href: 'https://w3313003.github.io/qqdialog/JD.html',
+			}, {
+				demoName: '疯游精首页',
+				href: 'https://w3313003.github.io/qqdialog/fyj.html',
+			},{
+				demoName: 'QQ音乐首页',
+				href: 'https://w3313003.github.io/qqdialog/QQmusic.html',
+			}],
+			isShow: false,
+		}, {
 			title: '轮播',
 			demolist: [{
 				demoName: '轮播图',
@@ -226,7 +236,7 @@ let app = new Vue({
 			demolist: [{
 				demoName: '任务列表',
 				href: 'https://w3313003.github.io/demo/todos.html',
-			},{
+			}, {
 				demoName: '购物车页面',
 				href: 'https://w3313003.github.io/demo/cart.html',
 			}, {
@@ -235,6 +245,12 @@ let app = new Vue({
 			}, {
 				demoName: 'qq新歌首发',
 				href: 'https://w3313003.github.io/demo/qqmusic.html',
+			}, {
+				demoName: '对话框',
+				href: 'https://w3313003.github.io/qqdialog/qqdialog.html',
+			},{
+				demoName: '模仿饿了么',
+				href: 'https://w3313003.github.io/Copyfromele/index.html',
 			}, ],
 			isShow: false,
 		}, ]
@@ -251,17 +267,53 @@ let app = new Vue({
 				this.demo[i].isShow = false;
 			};
 		},
+		seacher() {
+			let url = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${this.selectValue}`;
+			this.seacherTo(url);
+		},
+		seacherTo(url) {
+			let that = this;
+			jQuery.ajax({
+				type: "get",
+				async: true,
+				url: url,
+				dataType: "jsonp",
+				jsonp: "cb", 
+				success: function(data) {
+					let resData = Array.from(data.s);
+					resData.forEach((value, index) => {
+						if(index > 4) return;
+						that.response[index] = resData[index];
+					});
+				}
+			});
+		},
+		openSeacher() {
+			window.open('https://www.baidu.com/s?wd=' + this.selectValue);
+		},
+		open(item) {
+			window.open('https://www.baidu.com/s?wd=' + item);
+		}
 	},
 	filters: {
 		count(value) {
 			return "(共" + value + "个)";
 		},
 	},
-	//		mounted: function() {
-	//			this.$nextTick(() => {
-	//				this.maskShow = true;
-	//			})
-	//		},
+	computed: {
+		seacherShow() {
+			if(this.selectValue) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+	},
+			mounted: function() {
+				this.$nextTick(() => {
+					this.maskShow = true;
+				})
+			},
 });
 let nav = document.getElementById('nav-fixed'),
 	navTop = nav.offsetTop;
@@ -273,8 +325,15 @@ let mySwiper = new Swiper('.my-swiper', {
 	loop: true,
 	centeredSlides: true,
 	effect: 'coverflow',
+	coverfolw:{
+		slideShadows:false,
+		stretch:50,
+	},
 	slidesPerView: 2,
 	slideToClickedSlide: true,
+	spaceBetween : 50,
+	preventClicks: true,
+	preventClicksPropagation: true,
 	prevButton: '.swiper-button-prev',
 	nextButton: '.swiper-button-next',
 })

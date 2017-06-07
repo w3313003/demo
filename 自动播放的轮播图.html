@@ -99,7 +99,12 @@
 				var aNum = aUl[1].getElementsByTagName("li");
 				var timer = play = null;
 				var i = index = 0;
-
+				oBox.onmouseover = function(){
+					clearInterval(timers);
+				};
+				oBox.onmouseout = function(){
+					autoPlay();
+				}
 				//切换按钮
 				for(i = 0; i < aNum.length; i++) {
 					aNum[i].index = i;
@@ -107,7 +112,13 @@
 						show(this.index)
 					}
 				}
-
+				autoPlay = function(){
+					timers = setInterval(function(){
+						index>=aNum.length-1 ? index=0 : index++;
+						show(index);
+					},2000)
+				};
+				autoPlay();
 				//图片切换, 淡入淡出效果
 				function show(a) {
 					index = a;
