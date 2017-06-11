@@ -39,7 +39,7 @@
 			<transition name="open">
 				<div class="mask" v-if='maskShow'>
 					<p class='mask-tip'>YOUR WILL,MY HANDS</p>
-					<p class='mask-btn' @touchend='maskShow=false' @click='maskShow=false'>欢迎进入</p>
+					<p class='mask-btn' @touchend.stop='maskShow=false' @click='maskShow=false'>欢迎进入</p>
 				</div>
 			</transition>
 			<header class='head'>

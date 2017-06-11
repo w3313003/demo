@@ -14,8 +14,7 @@ body{
 	position: fixed;
 	top: 0;
 	left: 0;
-	background: url(../img/bgImg.jpg) no-repeat top center;
-	background-size: cover;
+	background-color: rgba(0,0,0,.6);
 	z-index: 999;
 }
 
