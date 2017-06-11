@@ -293,6 +293,9 @@ let vm = new Vue({
 		},
 		open(item) {
 			window.open('https://www.baidu.com/s?wd=' + item);
+		},
+		clear() {
+			this.selectValue = '';
 		}
 	},
 	filters: {
@@ -314,7 +317,7 @@ let vm = new Vue({
 			this.maskShow = true;
 			setInterval(() => {
 				this.now = new Date().toLocaleString();
-			},10)
+			},1000)
 		})
 	},
 });
