@@ -34,13 +34,12 @@
 			}
 		</style>
 	</head>
-
 	<body>
 		<div id="app">
 			<transition name="open">
 				<div class="mask" v-if='maskShow'>
 					<p class='mask-tip'>YOUR WILL,MY HANDS</p>
-					<p class='mask-btn' @click='maskShow=false'>欢迎进入</p>
+					<p class='mask-btn' @touchend='maskShow=false' @click='maskShow=false'>欢迎进入</p>
 				</div>
 			</transition>
 			<header class='head'>
@@ -84,7 +83,7 @@
 							<div class="modal-body">
 								<p>手机：15665438551</p>
 								<p>邮箱：w3313003@163.com</p>
-								<p>QQ: 793964424</p>
+								<p>QQ/微信: 793964424</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -133,6 +132,8 @@
 					</div>
 					<section class='my-demo'>
 						<div class="container">
+							<div class="row">
+								<div class='col-xs-12 col-md-6 col-md-offset-3'>
 							<div class='my-swiper'>
 								<div class="swiper-wrapper">
 									<div class="swiper-slide">
@@ -155,6 +156,8 @@
 								<div class="swiper-button-prev swiper-button-black"></div>
 								<div class="swiper-button-next swiper-button-black"></div>
 							</div>
+						</div>
+						</div>
 						</div>
 					</section>
 			</section>

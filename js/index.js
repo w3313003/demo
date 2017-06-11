@@ -14,8 +14,8 @@ let vm = new Vue({
 				isShow: false,
 			},
 			{
-				text: 'github',
-				href: 'http://github.com',
+				text: 'Mint-ui',
+				href: 'http://mint-ui.github.io/docs/#/zh-cn2/quickstart',
 				isShow: false,
 			}, {
 				text: 'segmentfault',
@@ -275,11 +275,10 @@ let vm = new Vue({
 			let that = this;
 			jQuery.ajax({
 				type: "get",
-				async: true,
 				url: url,
 				dataType: "jsonp",
 				jsonp: "cb", 
-				success: function(data) {
+				success(data) {
 					let resData = Array.from(data.s);
 					resData.forEach((value, index) => {
 						if(index > 4) return;
@@ -324,11 +323,7 @@ window.onscroll = () => {
 let mySwiper = new Swiper('.my-swiper', {
 	loop: true,
 	centeredSlides: true,
-	effect: 'coverflow',
-	coverfolw:{
-		slideShadows:false,
-		stretch:50,
-	},
+	effect: 'cube',
 	slidesPerView: 2,
 	slideToClickedSlide: true,
 	spaceBetween : 50,
