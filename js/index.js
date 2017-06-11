@@ -4,6 +4,7 @@ let vm = new Vue({
 		maskShow: false,
 		selectValue: null,
 		response: [],
+		now: 0,
 		navItem: [{
 				text: 'Vue官方文档',
 				href: 'https://cn.vuejs.org/v2/api/',
@@ -308,11 +309,14 @@ let vm = new Vue({
 			}
 		},
 	},
-			mounted: function() {
-				this.$nextTick(() => {
-					this.maskShow = true;
-				})
-			},
+	mounted: function() {
+		this.$nextTick(() => {
+			this.maskShow = true;
+			setInterval(() => {
+				this.now = new Date().toLocaleString();
+			},10)
+		})
+	},
 });
 let nav = document.getElementById('nav-fixed'),
 	navTop = nav.offsetTop;
