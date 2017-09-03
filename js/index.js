@@ -276,7 +276,7 @@ let vm = new Vue({
                     href: 'https://github.com/w3313003/hotel',
                 },
                 {
-                    demoName: '根据地龙虾',
+                    demoName: '根据地龙虾馆',
                     href: 'http://www.genjudi.shop',
                 },
             ],
