@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box {
+				width: 200px;
+				height: 200px;
+				background-color: #004;
+				position: absolute;
+				right: 0;
+			}
+			
+			.wrap {
+				width: 400px;
+				height: 600px;
+				border: 1px solid cornflowerblue;
+				position: relative;
+				float: left;
+				margin-left: 10px;
+			}
+			
+			.flag {
+				border: 2px solid #20A0FF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h3>实现拖动的条件：</h3>
+		<p> 1 被拖动的元素需要处在一个class为wrap或者已经具有position属性的父元素中<br /> 2 元素需要添加"box"类名
+		</p>
+		<h6>如需添加返回原位功能在父元素中添加一个button按钮即可</h6>
+		<div class='wrap flag'>
+			<div class="box"></div>
+			<button>返回原位</button>
+		</div>
+		<script type="text/javascript">
+			// 防止全局环境被污染 写在自执行函数中；
+			! function() {
+				function Move(obj) {
+					this.obj = obj;
+					this.oPos = [{
+						x: this.obj.offsetLeft,
+						y: this.obj.offsetTop
+					}];
+					this.setMove();
+				};
+				Move.prototype = {
+					constructor: Move,
+					setMove: function() {
+						var that = this;
+						var signL = signR = signU = signD = flag = false;
+						var btn = this.obj.parentNode.getElementsByTagName('button')[0];
+						this.obj.onmousedown = function(event) {
+							var _that = this;
+							var event = event || window.event;
+							disX = event.clientX - _that.offsetLeft;
+							disY = event.clientY - _that.offsetTop;
+							that.oPos.push({
+								x: disX,
+								y: disY
+							});
+							flag = true;
+						};
+						this.obj.parentNode.onmousemove = function(event) {
+							if(!flag) return false;
+							var event = event || window.event,
+								moveX = event.clientX - disX,
+								moveY = event.clientY - disY,
+								bodyW = that.obj.parentNode.offsetWidth,
+								bodyH = that.obj.parentNode.offsetHeight,
+								maxX = bodyW - that.obj.offsetWidth,
+								maxY = bodyH - that.obj.offsetHeight;
+							moveX = moveX <= 0 ? 0 : moveX;
+							moveX = moveX > maxX ? maxX : moveX;
+							moveY = moveY <= 0 ? 0 : moveY;
+							moveY = moveY > maxY ? maxY : moveY;
+							that.obj.style.left = moveX + 'px';
+							that.obj.style.top = moveY + 'px';
+							that.oPos.push({
+								x: moveX,
+								y: moveY
+							})
+						};
+						document.onmouseup = function() {
+							flag = false;
+						};
+						if(btn) {
+							btn.addEventListener('click', function() {
+								if(that.oPos.length == 1) return;
+								timer = setInterval(function() {
+									var pos = that.oPos.pop();
+									pos ? (that.obj.style.left = pos.x + 'px', that.obj.style.top = pos.y + 'px') : clearInterval(timer);
+								}, 10);
+							})
+						};
+
+						keyDown = setInterval(function() {
+							if(signL) {
+								that.obj.style.left = that.obj.offsetLeft - 1 + 'px';
+							};
+							if(signR) {
+								that.obj.style.left = that.obj.offsetLeft + 1 + 'px';
+							};
+							if(signD) {
+								that.obj.style.top = that.obj.offsetTop + 1 + 'px';
+							};
+							if(signU) {
+								that.obj.style.top = that.obj.offsetTop - 1 + 'px';
+							};
+							that.slimit();
+						});
+						document.onkeydown = function(event) {
+							var event = event || window.event;
+							switch(event.keyCode) {
+								case 38:
+									signU = true;
+									break;
+								case 40:
+									signD = true;
+									break;
+								case 37:
+									signL = true;
+									break;
+								case 39:
+									signR = true;
+									break;
+							}
+						};
+						document.onkeyup = function(event) {
+							var event = event || window.event;
+							switch(event.keyCode) {
+								case 38:
+									signU = false;
+									break;
+								case 40:
+									signD = false;
+									break;
+								case 37:
+									signL = false;
+									break;
+								case 39:
+									signR = false;
+									break;
+							}
+						};
+					},
+					slimit: function() {
+						var pW = this.obj.parentNode.offsetWidth,
+							pH = this.obj.parentNode.offsetHeight,
+							maxX = pW - this.obj.offsetWidth,
+							maxY = pH - this.obj.offsetHeight;
+						this.obj.offsetLeft <= 0 && (this.obj.style.left = 0)
+						this.obj.offsetTop <= 0 && (this.obj.style.top = 0);
+						this.obj.offsetLeft >= maxX && (this.obj.style.left = maxX + 'px');
+						this.obj.offsetTop >= maxY && (this.obj.style.top = maxY + 'px');
+					}
+					},
+					//把获取的元素挨个new一遍;
+					Move.init = function(item) {
+						var that = this;
+//						var arr = Array.prototype.slice.apply(item);
+						//es6新增;
+						let arr = Array.from(item);
+						arr.forEach(function(val) {
+							return new that(val);
+						});
+						console.log(arr.length);
+					};
+					window.Move = Move;
+				}();
+				var box = document.getElementsByClassName("box");
+				window.onload = function() {
+					Move.init(box);
+				}
+		</script>
+	</body>
+
+</html>

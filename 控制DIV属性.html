@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style type="text/css">
+	.wrap{
+		width: 400px;
+		margin: 0 auto;
+		position: relative;
+	}
+	#box{
+		height: 100px;
+		width: 100px;
+		background-color: #000;	
+		position: absolute;
+		t
+	}
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+	<button>变宽</button>
+	<button>变高</button>
+	<button>变色</button>
+	<button>隐藏</button>
+	<button>重置</button>
+	<div id="box"></div>
+	</div>
+	<script type="text/javascript">
+	var div = document.getElementById('box');
+	var w = div.offsetWidth;
+	var h = div.offsetHeight;
+	var btn = document.getElementsByTagName('button');
+	btn[0].onclick=function(){
+		div.style.width = div.offsetWidth*1.5 + 'px'
+	}
+	btn[1].onclick = function(){
+		div.style.height = div.offsetHeight*1.5+'px';
+	}
+	btn[2].onclick = function(){
+		div.style.backgroundColor = 'pink';
+	}
+	btn[3].onclick = function(){
+		div.style.display = "none"
+	}
+	btn[4].onclick = function(){
+		div.style.width = w +'px';
+		div.style.height = h +'px';
+		div.style.backgroundColor = '#000';
+		div.style.display = 'block';
+	}
+	</script>
+</body>
+</html>

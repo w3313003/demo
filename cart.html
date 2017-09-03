@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta content="IE=dege,chrom=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <title>Cart</title>
+    <link href="css/VueDemo/base.css" rel="stylesheet">
+    <link href="css/VueDemo/checkout.css" rel="stylesheet">
+    <link href="css/VueDemo/modal.css" rel="stylesheet">
+    <style type="text/css">
+        .box   {
+            width: 50px;
+            text-align: center;
+            background-color: #fff;
+        }
+        .quantity {
+        	position: relative;
+        	width: 72px;
+        }
+        .quantity input {
+        	width: 45px;
+        	height: 35px;
+        	text-align: center;
+        	padding: 0;
+        }
+        .quantity-btn-L,.quantity-btn-R {
+        	font: 700 15px/15px "microsoft yahei";
+        	width:10px;
+        	height: 10px;
+        	text-align: center;
+        	display : block;
+        	position: absolute;
+        	top: 11px;
+        	left: 0;
+        }
+        .quantity-btn-R {
+        	left: 61px;
+        }
+        .cart-item-operation a{
+        	background-color: #000;
+        }
+        .cart-foot-l {
+        	width: 300px;
+        }
+        .cart-foot-l div {
+        	float: left;
+        	margin : 2px 0 0 10px;
+        }
+    </style>
+    <script type="text/javascript" src='js/jquery-3.2.1.js'></script>
+</head>
+<body class="checkout">
+      <div id="app">
+        <div class="container">
+          <div class="cart">
+            <div class="checkout-title">
+              <span>购物车</span>
+            </div>
+
+            <!-- table -->
+            <div class="item-list-wrap">
+              <div class="cart-item">
+                <div class="cart-item-head">
+                  <ul>
+                    <li>商品信息</li>
+                    <li>商品金额</li>
+                    <li>商品数量</li>
+                    <li>总金额</li>
+                    <li>编辑</li>
+                  </ul>
+                </div>
+                <ul class="cart-item-list">
+                	<!--item代表实例中productList数组中每个对象-->
+                  <li v-for='(item,index) in productList'>
+                    <div class="cart-tab-1">
+                      <div class="cart-item-check">
+                      	<!--此处绑定的class在应在迭代的item中，data中的数据会被其他li共享-->
+                        <a href="javascript:void 0" class="item-check-btn" v-bind:class='{"check": item.isChecked}' @click='check(item)'>
+                        </a>
+                      </div>
+                      <div class="cart-item-pic">
+                        <img :src='item.productImage' :alt='item.productType'>
+                      </div>
+                      <div class="cart-item-title">
+                        <div class="item-name">{{index+1 + '.'+item.productName}}</div>
+                      </div>
+                      <div class="item-include">
+                        <dl>
+                          <dt>赠送:</dt>
+                          <dd v-for='part in item.parts'>{{part.partsName}}
+                          </dd>
+                        </dl>
+                      </div>
+                    </div>
+                    <div class="cart-tab-2">
+                      <div class="item-price">{{item.productPrice | money('元')}}</div>
+                    </div>
+                    <div class="cart-tab-3">
+                      <div class="item-quantity">
+                        <div class="select-self select-self-open">
+                          <div class="quantity">
+                            <a class='quantity-btn-L' href="javascript:void 0" @click='change(item,-1)'>-</a>
+                           <input type="text" v-model='item.productQuantity' />
+                            <a class='quantity-btn-R' href="javascript:void 0" @click='change(item,1)'>+</a>
+                          </div>
+                        </div>
+                        <div class="item-stock">{{item.productState}}</div>
+                      </div>
+                    </div>
+                    <div class="cart-tab-4">
+                      <div class="item-price-total">{{item.productPrice*item.productQuantity | money('元')}}</div>
+                    </div>
+                    <div class="cart-tab-5">
+                      <div class="cart-item-operation">
+                        <a href="javascript:void 0" class="item-edit-btn" @click='deleteProduct(item,index)'>
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- footer -->
+            <div class="cart-foot-wrap">
+              <div class="cart-foot-l">
+                <div class="item-all-check" @click='checkAll(true)'>
+                  <a href="javascript:void 0">
+                    <span class="item-check-btn" :class="{'check' : ischeckAll}" >
+                    </span>
+                    <span>全选</span>
+                  </a>
+                </div>
+                <div class="item-all-del">
+                  <a href="javascript:void 0" class="item-del-btn">
+                    <span @click='checkAll(false)'>取消全选</span>
+                  </a>
+                </div>
+              	<div class="item-all-re">
+              	  <a href="javascript:void 0" class="item-del-btn">
+                    <span @click='inverse'>反选</span>
+                  </a>
+              	</div>
+              </div>
+              <div class="cart-foot-r">
+                <div class="item-total">
+                  Item total: <span class="total-price">{{calcTotalPrice　|  money('元')}}</span>
+                </div>
+                <div class="next-btn-wrap">
+                  <a href="address.html" class="btn btn--red" style="width: 200px">结账</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<!--删除弹出层-->
+        <div class="md-modal modal-msg md-modal-transition " id="showModal" :class='{"md-show":isShow}'>
+          <div class="md-modal-inner">
+            <div class="md-top">
+              <button class="md-close" @click='isShow=false;'></button>
+            </div>
+            <div class="md-content">
+              <div class="confirm-tips">
+                <p id="cusLanInfo">你确认删除此订单信息吗?</p>
+              </div>
+              <div class="btn-wrap col-2">
+                <button class="btn btn--m" id="btnModalConfirm" @click='delProduct' >Yes</button>
+                <button class="btn btn--m btn--red" id="btnModalCancel"@click='isShow=false;'>No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--遮罩层-->
+        <div class="md-overlay" v-if='isShow'></div>
+      </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

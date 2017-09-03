@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div {
+				width: 100px;
+				height: 100px;
+				background-color: salmon;
+				position: absolute;
+				left: 500px;
+				top: 20px;
+				cursor: move;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="div">
+
+		</div>
+		<button id="restore">回放拖动轨迹</button>
+		<script>
+			var div = document.getElementById("div");
+			var disX = disY = 0;
+			var sign = false;
+			var pos = [{
+				x: div.offsetLeft,
+				y: div.offsetTop,
+			}];
+			var timer;
+			var restore = document.getElementById("restore");
+			div.onmousedown = function(event) {
+				var event = event || window.event;
+				//记录偏移；
+				disX = event.clientX - div.offsetLeft;
+				disY = event.clientY - div.offsetTop;
+				sign = true;
+			}
+			document.onmousemove = function(event) {
+				if(!sign) return true; //等价于if (sign ===false)
+				var event = event || window.event;
+				//框架的位置;
+				var moveX = event.clientX - disX;
+				var moveY = event.clientY - disY;
+				//限制范围；
+				var maxL = document.documentElement.clientWidth - div.offsetWidth;
+				var maxT = document.documentElement.clientHeight - div.offsetHeight;
+								moveX = moveX > 0 ? moveX : 0;//保证不为负数；
+								moveX = moveX > maxL ? maxL : moveX;
+								moveY = moveY < 0 ? 0 : moveY;
+								moveY = moveY > maxT ? maxT : moveY;
+								div.style.left = moveX + "px";
+								div.style.top = moveY + "px";
+				pos.push({
+					x: moveX,
+					y: moveY
+				})
+			}
+			document.onmouseup = function() {
+				sign = false;
+			}
+			restore.onclick = function() {
+				if(pos.length == 1) {
+					return false
+				};
+				timer = setInterval(function() {
+					var oPos = pos.pop();
+					oPos != null ? (div.style.left = oPos.x + 'px', div.style.top = oPos.y + 'px') : clearInterval(timer)
+				}, 20);
+			}
+		</script>
+	</body>
+
+</html>

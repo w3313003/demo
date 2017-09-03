@@ -1,0 +1,150 @@
+.Carousel-bg {
+	background: #000 url(../img/bg_index_new.jpg) 50% 0 repeat-x;
+	height: 734px;
+	position: relative;
+}
+
+.wrap {
+	position: absolute;
+	top: 150px;
+	width: 100%;
+	text-align: center;
+}
+
+.wrap:hover .pre {
+	left: 0;
+	transition: left 1s;
+}
+
+.wrap:hover .next {
+	right: 0;
+	transition: right 1s;
+}
+
+
+.pre {
+	position: absolute;
+	left: -80px;
+	z-index: 1;
+}
+
+.Carousel-content {
+	width: 1200px;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.next {
+	position: absolute;
+	right: -80px;
+}
+
+.arrow {
+	width: 1%;
+	font-size: 40px;
+	display: inline-block;
+	margin-top: 150px;
+	padding: 20px 30px;
+	background-color: rgba(255,255,255,0.5);
+}
+
+.arrow:hover {
+	background-color: #20A0FF;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+ul {
+	position: relative;
+	list-style-type: none;
+	width: 500%;
+}
+
+li {
+	float: left;
+	
+}
+
+.cover {
+	width: 300px;
+	height: 300px;
+	position: relative;
+	overflow: hidden;
+}
+
+img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	background-color: #fff;
+	opacity: 0;
+}
+
+.cover:hover img {
+	transform: scale(1.2);
+	transition: transform 0.5s;
+}
+.cover:hover .mask {
+	opacity: 0.4;
+	transition: opacity 0.5s; 
+	cursor: pointer;
+}
+
+.playerbtn {
+	background-image: url(../img/cover_play.png);
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	left: 50%;
+	margin-left: -35px;
+	top:50%;
+	margin-top: -35px;
+	z-index: 1;
+	transform: scale(0);
+	transition: transform 0.3s ease-out;
+}
+
+.cover:hover .playerbtn{
+	transform: scale(1);
+	transition: transform 0.5s ease-in;
+	display: block;
+	cursor: pointer;
+}
+
+.detail {
+	background-color: rgba(0,0,0,.8);
+	padding: 20px 0px;
+	text-align: center;
+}
+
+.detail a {
+	display: block;
+	line-height: 30px;
+}
+
+.indexs {
+	color: white;
+}
+
+span {
+	font-size: xx-large;
+	margin: 0px 5px;
+	color: rgba(198,198,198,0.5);
+	cursor: pointer;
+}
+
+.on {
+	color: white;
+}

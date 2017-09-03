@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>键盘控制的小demo</title>
+		<style>
+			.box {
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background-color: #008B8B;
+				left: 300px;
+				cursor: move;
+			}
+			.box:hover{
+				box-shadow: 0 0 5px #000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box"></div>
+		<button class='btn'>点击复位</button>
+		<p>
+			ctrl + ↑ : 变大；<br/>
+			ctrl + ↓ ： 变小；<br/>
+			按下上下左右控制移动；<br/>
+			鼠标拖动控制移动；<br/>
+		</p>
+		<script>
+			window.onload = function() {
+				var div = document.getElementsByTagName("div")[0];
+				var signL = signR = signU = signD = moveSign = false;
+				var oPos = [{
+					x: div.offsetLeft,
+					y: div.offsetTop
+				}];
+				var btn = document.getElementsByTagName("button")[0];
+				//键盘移动部分；
+				timer = setInterval(function() {
+					signL && (div.style.left = div.offsetLeft - 10 + "px", oPos.push({
+						x: div.offsetLeft,
+						y: div.offsetTop
+					}));
+					signR && (div.style.left = div.offsetLeft + 10 + "px", oPos.push({
+						x: div.offsetLeft,
+						y: div.offsetTop
+					}));
+					signU && (div.style.top = div.offsetTop - 10 + "px", oPos.push({
+						x: div.offsetLeft,
+						y: div.offsetTop
+					}));
+					signD && (div.style.top = div.offsetTop + 10 + "px", oPos.push({
+						x: div.offsetLeft,
+						y: div.offsetTop
+					}));
+					maxBoundary();
+				}, 10);
+				//限制拖动范围；
+				function maxBoundary() {
+					var bodyW = document.documentElement.clientWidth || document.body.clientWidth;
+					var bodyH = document.documentElement.clientHeight || document.body.clientHeight;
+					var maxL = bodyW - div.offsetWidth;
+					var maxT = bodyH - div.offsetHeight;
+					div.offsetLeft > maxL && (div.style.left = maxL + 'px');
+					div.offsetLeft < 0 && (div.style.left = 0);
+					div.offsetTop > maxT && (div.style.top = maxT + 'px');
+					div.offsetTop <= 0 && (div.style.top = 0);
+				};
+				//键盘事件；
+				document.onkeydown = function(event) {
+					var event = event || window.event;
+					var ctrl = event.ctrlKey;
+					switch(event.keyCode) {
+						//左；
+						case 37:
+							signL = true;
+							break;
+							//上
+						case 38:
+							if(ctrl) {
+								var oldW = div.offsetWidth;
+								var oldH = div.offsetHeight;
+								div.style.width = div.offsetWidth * 1.5 + 'px';
+								div.style.height = div.offsetHeight * 1.5 + 'px';
+								//最新的边距 = 变大前的边距 - 变大部分的1/2;
+								div.style.left = div.offsetLeft - (div.offsetWidth - oldW) / 2 + 'px';
+								div.style.top = div.offsetTop - (div.offsetHeight - oldH) / 2 + 'px';
+								break;
+							}
+							signU = true;
+							break;
+							//右；
+						case 39:
+							signR = true;
+							break;
+							//下
+						case 40:
+							if(ctrl) {
+								var oldW = div.offsetWidth;
+								var oldH = div.offsetHeight;
+								div.style.width = div.offsetWidth * 0.5 + 'px';
+								div.style.height = div.offsetHeight * 0.5 + 'px';
+								//最新的边距 = 变大前的边距 - 变大部分的1/2;
+								div.style.left = div.offsetLeft - (div.offsetWidth - oldW) / 2 + 'px';
+								div.style.top = div.offsetTop - (div.offsetHeight - oldH) / 2 + 'px';
+								break;
+							}
+							signD = true;
+							break;
+					}
+				};
+				//结束键盘；
+				document.onkeyup = function(event) {
+					var event = event || window.event;
+					switch(event.keyCode) {
+						//左；
+						case 37:
+							signL = false;
+							break;
+							//上
+						case 38:
+							signU = false;
+							break;
+							//右；
+						case 39:
+							signR = false;
+							break;
+							//下
+						case 40:
+							signD = false;
+							break;
+					};
+				};
+				//鼠标事件开始
+				div.onmousedown = function(event) {
+					var event = event || window.event;
+					disX = event.clientX - this.offsetLeft;
+					disY = event.clientY - this.offsetTop;
+					moveSign = true;
+				};
+				document.onmousemove = function(event) {
+					if(!moveSign) return false;
+					var event = event || window.event;
+					var moveX = event.clientX - disX;
+					var moveY = event.clientY - disY;
+					var bodyW = document.documentElement.clientWidth || document.body.clientWidth;
+					var bodyH = document.documentElement.clientHeight || document.body.clientHeight;
+					var maxL = bodyW - div.offsetWidth;
+					var maxT = bodyH - div.offsetHeight;
+					moveX = moveX <= 0 ? 0 : moveX;
+					moveX = moveX > maxL ? maxL : moveX;
+					moveY = moveY <= 0 ? 0 : moveY;
+					moveY = moveY > maxT ? maxT : moveY;
+					div.style.left = moveX + 'px';
+					div.style.top = moveY + 'px';
+					oPos.push({
+						x: moveX,
+						y: moveY
+					})
+				};
+				document.onmouseup = function() {
+					moveSign = false;
+				};
+				//复位部分；
+				btn.onclick = function() {
+					if(oPos.length === 1) return;
+					timer = setInterval(function() {
+						var pos = oPos.pop();
+						pos ? (div.style.left = pos.x + 'px', div.style.top = pos.y + 'px') : clearInterval(timer);
+					}, 10)
+				}
+			}
+		</script>
+	</body>
+
+</html>
