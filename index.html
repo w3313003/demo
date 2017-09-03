@@ -1,187 +1,140 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,maximum-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel='stylesheet' href='css/swiper.min.css'>
-		<link rel="stylesheet" href='./css/index.css'>
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script>
-			jQuery.noConflict()
-		</script>
-		<script type="text/javascript" src="js/vue.js"></script>
-		<script src='js/swiper.min.js'></script>
-		<title>个人主页</title>
-		<style>
-			.toggle-enter-active {
-				transition: all 1s;
-			}
-			
-			.toggle-leave-active {
-				transition: all 0.5s;
-			}
-			
-			.toggle-enter,.toggle-leave-active {
-				opacity: 0;
-				transform: translateX(30px);
-			}
-			.toggle-move {
-				transition: transform 1s;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="app">
-			<transition name="open">
-				<div class="mask" v-if='maskShow'>
-					<p class='mask-tip'>YOUR WILL,MY HANDS</p>
-					<p class='mask-btn' @touchstart.stop='maskShow=false' @click='maskShow=false'>欢迎进入</p>
-				</div>
-			</transition>
-			<header class='head'>
-				<div class="container">
-					<nav class="navbar navbar-default" id='nav-fixed'>
-						<div class="container-fluid">
-							<div class='navbar-header'>
-								<img src="img/LOGO.png" />
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-list" aria-expanded="false">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,maximum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href='./css/index.css'>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script>
+        jQuery.noConflict()
+    </script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <title>个人主页</title>
+    <style>
+        .toggle-enter-active {
+            transition: all 1s;
+        }
+        
+        .toggle-leave-active {
+            transition: all 0.5s;
+        }
+        
+        .toggle-enter,
+        .toggle-leave-active {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        
+        .toggle-move {
+            transition: transform 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <transition name="open">
+            <div class="mask" v-if='maskShow'>
+                <p class='mask-tip'>YOUR WILL,MY HANDS</p>
+                <p class='mask-btn' @touchstart.stop='maskShow=false' @click='maskShow=false'>欢迎进入</p>
+            </div>
+        </transition>
+        <header class='head'>
+            <div class="container">
+                <nav class="navbar navbar-default" id='nav-fixed'>
+                    <div class="container-fluid">
+                        <div class='navbar-header'>
+                            <img src="img/LOGO.png" />
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-list" aria-expanded="false">
 							        <span class="sr-only">Toggle navigation</span>
 							        <span class="icon-bar"></span>
 							        <span class="icon-bar"></span>
 							        <span class="icon-bar"></span>
 						    	</button>
-							</div>
-							<div class="collapse navbar-collapse" id="nav-list">
-								<ul class='nav navbar-nav navbar-right'>
-									<li v-for='item in navItem'>
-										<a :href='item.href' target="_blank">{{item.text}}</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</nav>
-				</div>
-			</header>
-			<section class="call-to-me">
-				<!-- Button trigger modal -->
-				<button type="button" class="tel" data-toggle="modal" data-target="#myModal">
+                        </div>
+                        <div class="collapse navbar-collapse" id="nav-list">
+                            <ul class='nav navbar-nav navbar-right'>
+                                <li v-for='item in navItem'>
+                                    <a :href='item.href' target="_blank">{{item.text}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <section class="call-to-me">
+            <!-- Button trigger modal -->
+            <button type="button" class="tel" data-toggle="modal" data-target="#myModal">
   联系我
 </button>
-
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">联系方式</h4>
-							</div>
-							<div class="modal-body">
-								<p>手机：15665438551</p>
-								<p>邮箱：w3313003@163.com</p>
-								<p>QQ/微信: 793964424</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<h1 style='text-align: center;'>{{now}}</h1>
-			<section class='demoshow'>
-				<div class='container'>
-					<div class="seacher">
-						<div class="row">
-							<div class="col-xs-12 col-md-4 col-md-offset-4">
-								<div class="input-group">
-									<input class="form-control" placeholder="输入搜索内容后请按空格更新搜索列表" v-model='selectValue' @keyup.stop='seacher' @keyup.enter="openSeacher" @blur='clear'>
-									<span class="input-group-btn">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">联系方式</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>手机：15665438551</p>
+                            <p>邮箱：w3313003@163.com</p>
+                            <p>QQ/微信: 793964424</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <h1 style='text-align: center;'>{{now}}</h1>
+        <section class='demoshow'>
+            <div class='container'>
+                <div class="seacher">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 col-md-offset-4">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="输入搜索内容后请按空格更新搜索列表" v-model='selectValue' @keyup.stop='seacher' @keyup.enter="openSeacher" @blur='clear'>
+                                <span class="input-group-btn">
         								<button class="btn btn-default" type="button" @click="openSeacher">百度一下</button>
       								</span>
-								</div>
-								<div class="row">
-									<div class='col-xs-9'>
-										<transition name='seacher'>
-											<div class="list-group seacher-list" v-if='seacherShow'>
-												<a class="list-group-item" v-for='(item,index) in response' target="_blank" @click="open(item)">
+                            </div>
+                            <div class="row">
+                                <div class='col-xs-9'>
+                                    <transition name='seacher'>
+                                        <div class="list-group seacher-list" v-if='seacherShow'>
+                                            <a class="list-group-item" v-for='(item,index) in response' target="_blank" @click="open(item)">
 													{{item}}
 												</a>
-											</div>
-										</transition>
-									</div>
-								</div>
-							</div>
-						</div>
-						<h1 style='text-align: center;'>DEMO</h1>
-						<div class="row">
-							<div class='col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4 demo-list'>
-								<dl class='demo-row' v-for='(item,index) in demo' @click=demoList(index)>
-									<dt class='demo-title' :class="{'demo-title-active':item.isShow}">{{item.title}}{{item.demolist.length | count}}</dt>
-									<transition-group name='toggle'>
-										<dd class='demo-content' v-if='item.isShow' v-for='(dd,index) in item.demolist' v-bind:key='dd' mode='out-in'>
-											<a :href='dd.href' target="_blank">{{index+1}} {{dd.demoName}}</a>
-										</dd>
-									</transition-group>
-								</dl>
-							</div>
-						</div>
-					</div>
-					<section class='my-demo'>
-						<div class="container">
-							<div class="row">
-								<div class='col-xs-12 col-md-6 col-md-offset-3'>
-							<div class='my-swiper'>
-								<div class="swiper-wrapper">
-									<div class="swiper-slide">
-										<a class="wrap" href='https://w3313003.github.io/Copyfromele/index.html' target="_blank">
-											<h4>点击查看实例</h4>
-											<img src='img/ele.png'>
-										</a>
-									</div>
-									<div class="swiper-slide">
-										<a class="wrap" href='https://w3313003.github.io/qqdialog/qqdialog.html' target="_blank">
-											<h4>点击查看实例</h4>
-											<img src='img/dialog.jpg'>
-										</a>
-									</div>
-									<div class="swiper-slide"><a class="wrap" href='https://w3313003.github.io/demo/cart.html' target="_blank">
-											<h4>点击查看实例</h4>
-											<img src='img/cart.png'>
-										</a></div>
-								</div>
-								<div class="swiper-button-prev swiper-button-black"></div>
-								<div class="swiper-button-next swiper-button-black"></div>
-							</div>
-						</div>
-						</div>
-						</div>
-					</section>
-			</section>
-			<section id="my-skill">
-				<div class="container">
-					<h1 style="text-align: center;">专业技能</h1>
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2 col-xs-12">
-						<ul class="list-group">
-  							<li class="list-group-item">熟练掌握HTML、CSS，能够编写语义化的 HTML，熟悉 CSS 的使用，实现常用的布局与动画</li>
-  							<li class="list-group-item">熟练掌握原生JS进行DOM操作及jQuery、Bootstrap等库/框架</li>
-  							<li class="list-group-item">熟悉原生JS常用设计模式，代码编写遵守规范</li>
-  							<li class="list-group-item">学习ES6规范及VUE框架，并在不断实践并应用，熟练使用 ES6语法进行开发</li>
-  							<li class="list-group-item">了解GIT的常见命令进行版本控制，webpack的基本使用</li>
-						</ul>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-			<script type="text/javascript" src="js/index.js"></script>
-	</body>
-	<script>
-	</script>
+                                        </div>
+                                    </transition>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4 demo-list'>
+                            <dl class='demo-row' v-for='(item,index) in demo' @click=demoList(index)>
+                                <dt class='demo-title' :class="{'demo-title-active':item.isShow}">{{item.title}}{{item.demolist.length | count}}</dt>
+                                <transition-group name='toggle'>
+                                    <dd class='demo-content' v-if='item.isShow' v-for='(dd,index) in item.demolist' v-bind:key='dd' mode='out-in'>
+                                        <a :href='dd.href' target="_blank">{{index+1}} {{dd.demoName}}</a>
+                                    </dd>
+                                </transition-group>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        </div>
+        <script type="text/javascript" src="js/index.js"></script>
+</body>
+<script>
+</script>
 
 </html>
