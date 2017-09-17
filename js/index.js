@@ -207,21 +207,13 @@ let vm = new Vue({
             }, {
                 demoName: '星级评分',
                 href: 'https://w3313003.github.io/demo/星级评分.html',
-            }, ],
-            isShow: false,
-        }, {
-            title: '练习',
-            demolist: [{
+            }, {
                 demoName: '网页计算器',
                 href: 'https://w3313003.github.io/demo/计算器.html',
             }, {
                 demoName: '表格生成',
                 href: 'https://w3313003.github.io/demo/table.html',
-            }, ],
-            isShow: false,
-        }, {
-            title: '实例',
-            demolist: [{
+            }, {
                 demoName: '原生js瀑布流',
                 href: 'https://w3313003.github.io/demo/瀑布demo.html',
             }, {
@@ -230,10 +222,10 @@ let vm = new Vue({
             }, {
                 demoName: '悬浮切换(jQuery)',
                 href: 'https://w3313003.github.io/demo/悬浮切换.html',
-            }, ],
+            }],
             isShow: false,
         }, {
-            title: 'Vue',
+            title: 'Vue学习',
             demolist: [{
                 demoName: '任务列表',
                 href: 'https://w3313003.github.io/demo/todos.html',
@@ -260,6 +252,12 @@ let vm = new Vue({
                     demoName: '科峰自动化',
                     href: 'http://ahkefeng.com',
                 }, {
+                    demoName: '盛优装饰',
+                    href: 'http://www.shengy365.com/',
+                }, {
+                    demoName: '木文官网',
+                    href: 'http://www.ahmuwen.com',
+                }, {
                     demoName: '双赢金属',
                     href: 'http://www.ahsying.com/',
                 }, {
@@ -269,7 +267,7 @@ let vm = new Vue({
                     demoName: '酿博士',
                     href: 'http://www.niangboshi.com',
                 }, {
-                    demoName: '萌眼看世界(需微信浏览器打开)',
+                    demoName: '萌眼看世界',
                     href: 'http://www.mengyankanshijie.cn',
                 }, {
                     demoName: '维多利亚小程序(待上线)',
@@ -287,7 +285,7 @@ let vm = new Vue({
         //demo列表点击；
         demoList(i) {
             if (!this.demo[i].isShow) {
-                this.demo.forEach((item) => {
+                this.demo.forEach(item => {
                     item.isShow = false;
                 });
                 this.demo[i].isShow = true;
