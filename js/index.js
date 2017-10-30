@@ -6,23 +6,23 @@ let vm = new Vue({
         response: [],
         now: 0,
         navItem: [{
-                text: 'Vue官方文档',
-                href: 'https://cn.vuejs.org/v2/api/',
-                isShow: true,
-            }, {
-                text: '我的主页',
-                href: 'https://w3313003.github.io/my-resume/index.html',
-                isShow: false,
-            },
-            {
-                text: '我的sf',
-                href: 'https://segmentfault.com/u/captain_58db88b483779',
-                isShow: false,
-            }, {
-                text: '我的github',
-                href: 'https://github.com/w3313003',
-                isShow: false,
-            },
+            text: 'Vue官方文档',
+            href: 'https://cn.vuejs.org/v2/api/',
+            isShow: true,
+        }, {
+            text: '我的主页',
+            href: 'https://w3313003.github.io/my-resume/index.html',
+            isShow: false,
+        },
+        {
+            text: '我的sf',
+            href: 'https://segmentfault.com/u/captain_58db88b483779',
+            isShow: false,
+        }, {
+            text: '我的github',
+            href: 'https://github.com/w3313003',
+            isShow: false,
+        },
         ],
         demo: [{
             title: 'DOM元素基础操作',
@@ -44,7 +44,7 @@ let vm = new Vue({
             }, {
                 demoName: 'div闪烁',
                 href: 'https://w3313003.github.io/demo/div闪烁.html',
-            }, ],
+            },],
             isShow: false,
         }, {
             title: '简单函数',
@@ -91,7 +91,7 @@ let vm = new Vue({
             }, {
                 demoName: '数组练习',
                 href: 'https://w3313003.github.io/demo/数组练习.html',
-            }, ],
+            },],
             isShow: false,
         }, {
             title: '页面小组件',
@@ -134,7 +134,7 @@ let vm = new Vue({
             }, {
                 demoName: '自定义多级右键菜单',
                 href: 'https://w3313003.github.io/demo/升级版自定义菜单.html',
-            }, ],
+            },],
             isShow: false,
         }, {
             title: '静态仿站',
@@ -169,7 +169,7 @@ let vm = new Vue({
             }, {
                 demoName: '滑动门效果',
                 href: 'https://w3313003.github.io/demo/滑动门.html',
-            }, ],
+            },],
             isShow: false,
         }, {
             title: 'DOM拖拽控制',
@@ -191,7 +191,7 @@ let vm = new Vue({
             }, {
                 demoName: '模态框拖拽demo',
                 href: 'https://w3313003.github.io/demo/弹出层拖拽demo.html',
-            }, ],
+            },],
             isShow: false,
         }, {
             title: '页面交互',
@@ -244,42 +244,46 @@ let vm = new Vue({
             }, {
                 demoName: '模仿饿了么',
                 href: 'https://w3313003.github.io/Copyfromele/index.html',
-            }, ],
+            },],
             isShow: false,
         }, {
             title: '工作项目',
             demolist: [{
-                    demoName: '科峰自动化',
-                    href: 'http://ahkefeng.com',
-                }, {
-                    demoName: '盛优装饰',
-                    href: 'http://www.shengy365.com/',
-                }, {
-                    demoName: '木文官网',
-                    href: 'http://www.ahmuwen.com',
-                }, {
-                    demoName: '双赢金属',
-                    href: 'http://www.ahsying.com/',
-                }, {
-                    demoName: '融发金融',
-                    href: 'http://www.ahrongfa.com',
-                }, {
-                    demoName: '酿博士',
-                    href: 'http://www.niangboshi.com',
-                }, {
-                    demoName: '萌眼看世界',
-                    href: 'http://www.mengyankanshijie.cn',
-                }, {
-                    demoName: '维多利亚小程序(待上线)',
-                    href: 'https://github.com/w3313003/hotel',
-                },
-                {
-                    demoName: '根据地龙虾馆',
-                    href: 'http://www.genjudi.shop',
-                },
+                demoName: '科峰自动化',
+                href: 'http://ahkefeng.com',
+            }, {
+                demoName: '盛优装饰',
+                href: 'http://www.shengy365.com/',
+            }, {
+                demoName: '木文官网',
+                href: 'http://www.ahmuwen.com',
+            }, {
+                demoName: '双赢金属',
+                href: 'http://www.ahsying.com/',
+            }, {
+                demoName: '融发金融',
+                href: 'http://www.ahrongfa.com',
+            }, {
+                demoName: '酿博士',
+                href: 'http://www.niangboshi.com',
+            }, {
+                demoName: '萌眼看世界',
+                href: 'http://www.mengyankanshijie.cn',
+            }, {
+                demoName: '维多利亚小程序(待上线)',
+                href: 'https://github.com/w3313003/hotel',
+            },
+            {
+                demoName: '根据地龙虾馆',
+                href: 'http://www.genjudi.shop',
+            },
+            {
+                demoName: '百千亿官网',
+                href: 'http://www.ahbaiqiangyi.con',
+            },
             ],
             isShow: false,
-        }, ]
+        },]
     },
     methods: {
         //demo列表点击；
@@ -337,7 +341,7 @@ let vm = new Vue({
             }
         },
     },
-    mounted: function() {
+    mounted: function () {
         this.$nextTick(() => {
             this.maskShow = true;
             setInterval(() => {
