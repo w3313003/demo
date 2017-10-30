@@ -6,8 +6,8 @@ let vm = new Vue({
         response: [],
         now: 0,
         navItem: [{
-            text: 'Vue官方文档',
-            href: 'https://cn.vuejs.org/v2/api/',
+            text: '我的博客',
+            href: 'https://w3313003.github.io',
             isShow: true,
         }, {
             text: '我的主页',
